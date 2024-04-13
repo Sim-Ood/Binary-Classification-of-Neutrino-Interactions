@@ -5,17 +5,45 @@ Below is a brief summary of the [project report](https://github.com/Sim-Ood/Bina
 
 ## Introduction
 
-The aim of this project is to train a machine learning classifier on simulated images resembling the particle tracks made in the NOvA detector, to identify muon neutrino charged-current (CC) events. The secondary aim is to investigate the relationship between the image metadata, such as neutrino energy, and the performance of the classifier. There were 200 available files of data for this project which contained images of simulated neutrino interactions and their associated metadata.
+The aim of this project is to train a machine learning classifier on simulated images resembling the particle tracks made in the NOvA detector, to identify muon neutrino charged-current (CC) events. The secondary aim is to investigate the relationship between the image metadata, such as neutrino energy, and the performance of the classifier. There were 200 available files of data for this project which contained paired detector images (a top view and a side view) of neutrino interactions and their associated metadata.
 
 ## Preprocessing Data
 
-There are 17 classes of interaction, 4 of which are $\nu_{\mu}$ CC. By relabelling $\nu_{\mu}$ CC type events as 1 and all other classes as 0, the data is prepared for binary classification where 1 is positive and 0 is negative. The dataset is imbalanced with 88.24% of samples in the positive class, and 11.76% of samples in the negative class. Consequently, if the model learnt to label all samples as positive instead of distinguishing between positive and negative results, it could still achieve a misleading $\sim$88% accuracy. To address this the following strategies are considered.
+There are 17 classes of interaction, 4 of which are $\nu_{\mu}$ CC. By relabelling $\nu_{\mu}$ CC type events as 1 and all other classes as 0, the data is prepared for binary classification where 1 is positive and 0 is negative. The dataset is imbalanced with 88.24% of samples in the positive class, and 11.76% of samples in the negative class. Consequently, if the model learnt to label all samples as positive instead of distinguishing between positive and negative results, it could still achieve a misleading accuracy around 88%. To address this the following strategies are considered.
 
 - Resample the dataset to overrepresent the negative class and balance the distribution of samples over the two classes.
 - Implement class weights in the loss function to increase the penalty for incorrectly classified negative samples.
 - Evaluate model performance on multiple metrics alongside accuracy.
 - Identify the optimal threshold at which the model's probability scores is classed as positive and recalculate the accuracy. 
 
+High Energy Physics (HEP) experiments can generate immense quantities of data on rapid timescales. In a real world application of the binary classifier, resampling a vast training dataset may be too costly for a budget of limited resources. Furthermore, manipulating the distribution of the dataset may obscure undiscovered patterns that could potentially provide insight into the interaction physics. Hence, this project focuses on the latter 3 strategies.
 
+## Model Architecture and Performance
 
-Hence, the model's ability to predict on the negative minority class is a better indicator of its performance. 
+The classifier model applies convolutional neural network (CNN), pooling, and dropout layers to the image data. The side and top view images for each interaction are taken as two separate inputs. The model is trained on a batch size of 32, for with 450 steps per epoch 
+
+```mermaid
+flowchart TD
+    input1["Input Layer A (Top View Images)"] -->conv1A["2D Convolutional Layer 16 Filters, Kernel Size = (3,3)"]
+    conv1A -->drop1A["Dropout Layer (lose 0.25%)"]
+    drop1A -->pool1A["MaxPooling Layer pool size = (2,2)"]
+    pool1A -->conv2A["2D Convolutional Layer 32 Filters, Kernel Size = (3,3)"]
+    conv2A -->drop2A["Dropout Layer (lose 0.25%)"]
+    drop2A -->pool2A["MaxPooling Layer pool size = (2,2)"]
+    pool2A -->concat["Concatenated Input"]
+
+    input2["Input Layer B (Side View Images)"] -->conv1B["2D Convolutional Layer 16 Filters, Kernel Size = (3,3)"]
+    conv1B -->drop1B["Dropout Layer (lose 0.25%)"]
+    drop1B -->pool1B["MaxPooling Layer pool size = (2,2)"]
+    pool1B -->conv2B["2D Convolutional Layer 32 Filters, Kernel Size = (3,3)"]
+    conv2B -->drop2B["Dropout Layer (lose 0.25%)"]
+    drop2B -->pool2B["MaxPooling Layer pool size = (2,2)"]
+    pool2B -->concat
+
+    concat -->conv_merge["2D Convolutional Layer 32 Filters, Kernel Size = (5,5)"]
+    conv_merge -->drop_merge["Dropout Layer (lose 0.25%)"]
+    drop_merge -->pool_merge["MaxPooling Layer pool size = (2,2)"]
+    pool_merge -->flatten["Flatten Layer"]
+    flatten --> Dense["Dense Layer (200 neurons)"]
+    Dense -->output["Output Layer (Sigmoid)"]
+```
