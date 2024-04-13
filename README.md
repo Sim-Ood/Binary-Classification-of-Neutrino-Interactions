@@ -63,7 +63,7 @@ On this optimal threshold, the relationship between the model's performance and 
 
 Comparing images for high and low lepton energy provides insight into why the model's performance appears dependent on lepton energy. High lepton energy interactions produce clearer particle tracks, whereas the tracks made in low energy interactions are more visually complicated.
 <div align="center">
-    <img height="300" width = "400" src="Neutrino Classifier Figures/HighLow_en.png">
+    <img height="400" width = "500" src="Neutrino Classifier Figures/HighLow_en.png">
 </div>
 
 Investigating accuracy for different interaction types further suggets that model performance is dependent on the visual complexity of particle tracks. The model performs notably worse on deep inelastic scattering (DIS) type interactions, in which multiple tracks can be created, contributing to a "messy" detector image.  
@@ -74,5 +74,5 @@ Investigating accuracy for different interaction types further suggets that mode
 
 ## References
 
-See the [project report](https://github.com/Sim-Ood/Binary-Classification-of-Neutrino-Interactions/blob/main/Classifying%20Neutrinos%20Report.pdf) for references and full details of the report findings.
+See the [project report](https://github.com/Sim-Ood/Binary-Classification-of-Neutrino-Interactions/blob/main/Classifying%20Neutrinos%20Report.pdf) for references and full details of the project findings.
 
