@@ -51,3 +51,8 @@ flowchart TD
 
 During testing, the trained model outputs a probability score between $0-1$ for each testing sample. Testing samples with probability scores exceeding the chosen threshold are classified as positive. Samples with scores at or below the threshold are classified as negative. The model's accuracy for the positive and negative test samples are considered separately to gain better insight into its overall performance. The model's predictions are evaluated over a range of thresholds to identify the optimal threshold which maximises the overall accuracy.
 
+<div align="center">
+    <img height="200" src="Neutrino Classifier Figures/Optimal Threshold.png">
+</div>
+
+
