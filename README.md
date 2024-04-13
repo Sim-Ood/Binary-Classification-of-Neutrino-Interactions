@@ -49,25 +49,30 @@ flowchart TD
 ```
 ## Model Performance
 
-During testing, the trained model outputs a probability score between $0-1$ for each testing sample. Testing samples with probability scores exceeding the chosen threshold are classified as positive. Samples with scores at or below the threshold are classified as negative. The model's accuracy for the positive and negative test samples are considered separately to gain better insight into its overall performance. The model's predictions are evaluated over a range of thresholds to identify the optimal threshold which maximises the overall accuracy.
+During testing, the trained model outputs a probability score between $0-1$ for each testing sample. Testing samples with probability scores exceeding the chosen threshold are classed as positive. Samples with scores at or below the threshold are classed as negative. The model's accuracy for the positive and negative test samples are considered separately to gain better insight into its overall performance. The model's predictions are evaluated over a range of thresholds to identify the optimal threshold which maximises the overall accuracy.
 
 <div align="center">
-    <img height="200" src="Neutrino Classifier Figures/Optimal Threshold.png">
+    <img height="300" width = "400" src="Neutrino Classifier Figures/Optimal Threshold.png">
 </div>
 
-On this optimal threshold, the relationship between the model's performance and metavariables are investigated. The project considers the model's dependence on the neutrino energy, lepton energy, and the interaction type for interactions in the testing dataset. Whilst accuracy fluctuates seemingly randomly with neutrino energy, the model performs especially well on interactions with high neutrino energy. For lepton energy, a general trend of increasing accuracy with increasing energy is observed and again model performance is especially high for samples with high lepton energy. 
+On this optimal threshold, the relationship between the model's performance and metavariables are investigated. The project considers the model's dependence on the neutrino energy, lepton energy, and the interaction type for interactions in the testing dataset. Whilst accuracy fluctuates seemingly randomly with neutrino energy, the model performs especially well on interactions with high neutrino energy. For lepton energy, a general trend of increasing accuracy with increasing energy is observed and, as with neutrino energy, the model achieves high accuracies for samples with high lepton energy. 
 
 <div align="center">
-    <img height="200" src="Neutrino Classifier Figures/Nuen.png">
+    <img height="300" width = "400" src="Neutrino Classifier Figures/Lepen PN.png">
 </div>
 
+Comparing images for high and low lepton energy provides insight into why the model's performance appears dependent on lepton energy. High lepton energy interactions produce clearer particle tracks, whereas the tracks made in low energy interactions are more visually complicated.
+<div align="center">
+    <img height="300" width = "400" src="Neutrino Classifier Figures/HighLow_en.png">
+</div>
+
+Investigating accuracy for different interaction types further suggets that model performance is dependent on the visual complexity of particle tracks. The model performs notably worse on deep inelastic scattering (DIS) type interactions, in which multiple tracks can be created, contributing to a "messy" detector image.  
 
 <div align="center">
-    <img height="200" src="Neutrino Classifier Figures/Lepen.png">
+    <img height="300" width = "400" src="Neutrino Classifier Figures/Interaction_dep.png">
 </div>
 
+## References
 
-<div align="center">
-    <img height="200" src="Neutrino Classifier Figures/Interaction_dep.png">
-</div>
+See the [project report](https://github.com/Sim-Ood/Binary-Classification-of-Neutrino-Interactions/blob/main/Classifying%20Neutrinos%20Report.pdf) for references and full details of the report findings.
 
