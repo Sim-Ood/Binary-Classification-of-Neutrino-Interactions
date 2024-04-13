@@ -1,7 +1,7 @@
 # Binary Classification of Neutrino Interactions
 This repository contains the code and report for the Neutrino Interactions Project completed in 2024 for the Practical Machine Learning for Physicists course at UCL.
 
-Below is a brief summary of the [project report](https://github.com/Sim-Ood/Binary-Classification-of-Neutrino-Interactions/blob/main/Classifying%20Neutrinos%20Report.pdf)
+Below is a brief overview of project, covered in detail in the [project report](https://github.com/Sim-Ood/Binary-Classification-of-Neutrino-Interactions/blob/main/Classifying%20Neutrinos%20Report.pdf)
 
 ## Introduction
 
@@ -55,4 +55,19 @@ During testing, the trained model outputs a probability score between $0-1$ for 
     <img height="200" src="Neutrino Classifier Figures/Optimal Threshold.png">
 </div>
 
+On this optimal threshold, the relationship between the model's performance and metavariables are investigated. The project considers the model's dependence on the neutrino energy, lepton energy, and the interaction type for interactions in the testing dataset. Whilst accuracy fluctuates seemingly randomly with neutrino energy, the model performs especially well on interactions with high neutrino energy. For lepton energy, a general trend of increasing accuracy with increasing energy is observed and again model performance is especially high for samples with high lepton energy. 
+
+<div align="center">
+    <img height="200" src="Neutrino Classifier Figures/Nuen.png">
+</div>
+
+
+<div align="center">
+    <img height="200" src="Neutrino Classifier Figures/Lepen.png">
+</div>
+
+
+<div align="center">
+    <img height="200" src="Neutrino Classifier Figures/Interaction_dep.png">
+</div>
 
