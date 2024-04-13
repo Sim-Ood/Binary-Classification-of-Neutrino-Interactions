@@ -18,9 +18,9 @@ There are 17 classes of interaction, 4 of which are $\nu_{\mu}$ CC. By relabelli
 
 High Energy Physics (HEP) experiments can generate immense quantities of data on rapid timescales. In a real world application of the binary classifier, resampling a vast training dataset may be too costly for a budget of limited resources. Furthermore, manipulating the distribution of the dataset may obscure undiscovered patterns that could potentially provide insight into the interaction physics. Hence, this project focuses on the latter 3 strategies. The dataset is split into 80% training samples, 10% validation samples, and 10% testing samples. 
 
-## Model Architecture and Performance
+## Model Architecture
 
-The classifier model applies convolutional neural network (CNN), pooling, and dropout layers to the image data. The side and top view images for each interaction are taken as two separate inputs. The model is trained on a batch size of 32 for 20 epochs with 450 steps per epoch.
+The classifier model applies convolutional neural network (CNN), pooling, and dropout layers to the image data. The side and top view images for each interaction are taken as two separate inputs. The model is trained on a batch size of 32 for 20 epochs with 450 steps per epoch. 
 
 ```mermaid
 flowchart TD
@@ -47,3 +47,7 @@ flowchart TD
     flatten --> Dense["Dense Layer (200 neurons)"]
     Dense -->output["Output Layer (Sigmoid)"]
 ```
+## Model Performance
+
+During testing, the trained model outputs a probability score between $0-1$ for each testing sample. Testing samples with probability scores exceeding the chosen threshold are classified as positive. Samples with scores at or below the threshold are classified as negative. The model's accuracy for the positive and negative test samples are considered separately to gain better insight into its overall performance. The model's predictions are evaluated over a range of thresholds to identify the optimal threshold which maximises the overall accuracy.
+
